@@ -247,6 +247,14 @@ main > section + section:not(.parallax){border-top:1px solid var(--borda)}
   details .resposta{font-size:.89rem}
   details summary{font-size:.93rem;padding:18px 38px 18px 0}
   main > section{padding:52px 0}
+  footer{font-size:.6rem;letter-spacing:.1em;line-height:1.85;padding:24px 18px}
+  footer .bairros{font-size:.56rem;line-height:1.7;margin-top:9px}
+  .contatos{gap:12px 20px;margin-top:26px}
+  .contatos a{font-size:.88rem;gap:8px}
+  .contatos svg{width:15px;height:15px}
+  .fim .script{font-size:clamp(30px,8vw,40px)}
+  .fim p{font-size:.92rem}
+  .cta{padding:15px 26px;font-size:.88rem}
 }
 .credencial{margin-top:26px;border-left:2px solid var(--acento);padding:4px 0 4px 18px;
   display:grid;gap:12px}
@@ -291,9 +299,12 @@ summary:focus-visible{outline:2px solid var(--acento);outline-offset:3px}
   font-size:1.01rem;padding:6px 2px;border-bottom:1px solid transparent;transition:.2s}
 .contatos a:hover{border-bottom-color:var(--ouro-cl)}
 .contatos svg{width:17px;height:17px;flex:none;stroke:var(--ouro-cl)}
-footer{background:var(--oliva-esc);color:#A8B4A5;font-size:.71rem;letter-spacing:.14em;
-  text-transform:uppercase;text-align:center;padding:28px 20px;line-height:2.2}
+footer{background:var(--oliva-esc);color:#A8B4A5;font-size:.7rem;letter-spacing:.12em;
+  text-transform:uppercase;text-align:center;padding:30px 22px;line-height:2}
+footer p + p{margin-top:4px}
 footer a{color:#C9CFBE}
+footer .bairros{font-size:.62rem;letter-spacing:.08em;line-height:1.85;color:#8E9683;
+  max-width:62ch;margin-inline:auto;margin-top:12px;text-transform:none}
 
 .tema{flex:none;width:34px;height:34px;border-radius:50%;border:1px solid #D9BE8A44;
   background:transparent;color:#EDE9E1;cursor:pointer;display:grid;place-items:center;
@@ -614,7 +625,7 @@ footer a{color:#C9CFBE}
 <footer>
   <p>Allana Bevilaqua · Médica Veterinária · CRMV-RJ 15684</p>
   <p>Atendimento veterinário domiciliar para cães e gatos · Rio de Janeiro, RJ</p>
-  <p>Barra da Tijuca · Recreio dos Bandeirantes · Campo Grande · Zona Sul ·
+  <p class="bairros">Barra da Tijuca · Recreio dos Bandeirantes · Campo Grande · Zona Sul ·
      Jacarepaguá · Vargem Grande · Vargem Pequena · Guaratiba</p>
 </footer>
 
