@@ -166,14 +166,15 @@ main > section + section:not(.parallax){border-top:1px solid var(--borda)}
 
 /* ---------------- parallax ---------------- */
 .parallax{position:relative;height:clamp(380px,62vh,620px);display:grid;place-items:center;
-  text-align:center;padding:0 24px;border:0;
-  /* clip-path prende o filho position:fixed a esta faixa: e o que faz a foto
-     ficar realmente parada enquanto a pagina rola, inclusive no iPhone */
-  clip-path:inset(0)}
-.parallax img{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
-@supports not (clip-path:inset(0)){
-  .parallax{overflow:hidden}
-  .parallax img{position:absolute;height:100%;width:100%}}
+  text-align:center;padding:0 24px;border:0;overflow:hidden;
+  /* a foto fica parada enquanto o texto rola por cima */
+  background-repeat:no-repeat;background-position:center center;background-size:cover;
+  background-attachment:fixed;background-color:#2A2D22}
+/* iOS ignora background-attachment:fixed, entao ali usamos rolagem normal
+   com a foto ampliada, que continua bonito e nao quebra */
+@media (hover:none) and (pointer:coarse){
+  .parallax{background-attachment:scroll}}
+.parallax img{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
 .parallax::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,#2A2D22B3,#2A2D2280 45%,#2A2D22B8)}
 .parallax .frase{position:relative;z-index:2;color:#fff;max-width:min(720px,90vw)}
 .parallax .frase span{font-size:clamp(28px,4.2vw,50px);line-height:1.2;display:block;
@@ -412,9 +413,10 @@ footer a{color:#C9CFBE}
   </div>
 </div></section>
 
-<section class="parallax" aria-label="Atendimento domiciliar para gatos">
-    <img data-parallax src="img/pet-gato-dormindo.webp" alt="Gato dormindo tranquilo sobre uma manta branca macia" loading="lazy" decoding="async"
-         width="1600" height="1067">
+<section class="parallax" aria-label="Atendimento domiciliar para gatos"
+           style="background-image:url(img/pet-gato-dormindo.webp)">
+    <img src="img/pet-gato-dormindo.webp" alt="Gato dormindo tranquilo sobre uma manta branca macia" loading="lazy" decoding="async"
+         width="1900" height="1069">
     <p class="frase"><span class="script">o melhor consultório<br>é a casa dele</span><small>Atendimento domiciliar para gatos</small></p>
   </section>
 
@@ -432,9 +434,10 @@ footer a{color:#C9CFBE}
   <div class="servicos" style="margin-top:44px"><article class="serv"><h3>Consulta veterinária domiciliar</h3><p>Avaliação clínica completa no ambiente do pet, com anamnese detalhada, exame físico e conduta explicada para o tutor.</p></article><article class="serv"><h3>Vacinação de cães e gatos em casa</h3><p>Protocolo vacinal completo com vacinas transportadas em caixa térmica, caderneta oficial e controle de lote e reforço.</p></article><article class="serv"><h3>Coleta de exames em domicílio</h3><p>Sangue, urina e fezes coletados em casa, encaminhados a laboratório e com laudo enviado por WhatsApp.</p></article><article class="serv"><h3>Fluidoterapia e medicação injetável</h3><p>Soro subcutâneo, aplicação de injetáveis e acompanhamento terapêutico sem deslocar o animal.</p></article><article class="serv"><h3>Curativos e acompanhamento pós-operatório</h3><p>Troca de curativo, retirada de pontos e monitoramento da recuperação depois da cirurgia.</p></article><article class="serv"><h3>Avaliação pré-cirúrgica</h3><p>Exame clínico, avaliação de risco anestésico e encaminhamento a cirurgião parceiro de confiança.</p></article><article class="serv"><h3>Geriatria e cuidados paliativos</h3><p>Manejo da dor e qualidade de vida para pets idosos ou com doença crônica, com suporte à família.</p></article><article class="serv"><h3>Atendimento cat friendly</h3><p>Manejo de baixo estresse para gatos, respeitando território, tempo e comportamento felino.</p></article><article class="serv"><h3>Orientação nutricional</h3><p>Ajuste de dieta, controle de peso e suplementação conforme a faixa etária e o quadro clínico.</p></article><article class="serv"><h3>Check-up preventivo anual</h3><p>Rotina de saúde para detectar alterações antes de aparecerem os sintomas.</p></article><article class="serv"><h3>Microchipagem e RGA</h3><p>Identificação permanente do animal e registro geral, feito em casa.</p></article><article class="serv"><h3>Eutanásia humanitária</h3><p>Despedida digna, no lar, com acolhimento à família e todo o suporte no momento mais difícil.</p></article></div>
 </div></section>
 
-<section class="parallax" aria-label="Clínica médica de cães em domicílio">
-    <img data-parallax src="img/pet-cao-dormindo.webp" alt="Cão dormindo relaxado no chão da sala de casa" loading="lazy" decoding="async"
-         width="1600" height="1067">
+<section class="parallax" aria-label="Clínica médica de cães em domicílio"
+           style="background-image:url(img/pet-cao-dormindo.webp)">
+    <img src="img/pet-cao-dormindo.webp" alt="Cão dormindo relaxado no chão da sala de casa" loading="lazy" decoding="async"
+         width="1900" height="1069">
     <p class="frase"><span class="script">cuidar de perto<br>é cuidar melhor</span><small>Clínica médica de cães em domicílio</small></p>
   </section>
 
@@ -607,8 +610,7 @@ footer a{color:#C9CFBE}
     l.push('Quando: ' + valor('urg'));
     var obs = document.getElementById('f-obs').value.trim();
     if (obs) { l.push(''); l.push('O que está acontecendo: ' + obs); }
-    enviar.href = 'https://wa.me/5521969490099?text=' + encodeURIComponent(l.join('
-'));
+    enviar.href = 'https://wa.me/5521969490099?text=' + encodeURIComponent(l.join(String.fromCharCode(10)));
   }
 
   function abrir(e){
